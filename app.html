@@ -1,0 +1,43 @@
+<div class="container">
+  <h1>Chrultrabook Tools</h1>
+  <p class="status-bar">Status: {{ statusMessage }}</p>
+
+  <div class="card">
+    <h2>Hardware Diagnostics</h2>
+    <button (click)="loadDiagnostics()" class="primary-btn">Scan System</button>
+    
+    <div *ngIf="diagnostics" class="stats-grid">
+      <div class="stat-item">
+        <span>Temp</span>
+        <strong>{{ diagnostics.cpu_temp }}°C</strong>
+      </div>
+      <div class="stat-item">
+        <span>Battery</span>
+        <strong>{{ diagnostics.battery_health }}%</strong>
+      </div>
+      <div class="stat-item">
+        <span>Fan Speed</span>
+        <strong>{{ diagnostics.fan_rpm }} RPM</strong>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Fan Control</h2>
+    <div class="btn-group">
+      <button (click)="setFanProfile('Silent')" [class.active]="fanProfile === 'Silent'">Silent</button>
+      <button (click)="setFanProfile('Balanced')" [class.active]="fanProfile === 'Balanced'">Balanced</button>
+      <button (click)="setFanProfile('Turbo')" [class.active]="fanProfile === 'Turbo'">Turbo</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>Keyboard & Input</h2>
+    <label>Backlight Brightness: {{ backlightLevel }}%</label>
+    <input type="range" min="0" max="100" [(ngModel)]="backlightLevel" (change)="updateBacklight()">
+    
+    <div style="margin-top: 15px;">
+      <button (click)="remapSearchKey()" class="secondary-btn">Remap 'Search' to 'CapsLock'</button>
+    </div>
+  </div>
+</div>
